@@ -36,8 +36,7 @@ export default {
       },
       formResponse: {
         message: '',
-        success: false,
-        error: true
+        success: false
       },
       apiUrl: 'https://min-api.cryptocompare.com/data/price?'
     }
