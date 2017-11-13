@@ -1,5 +1,32 @@
 <template>
 	<div class="currency-exchange">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim commodi aliquam, iusto vero repellat in, perspiciatis corrupti, quis, incidunt nulla veritatis praesentium eum. Iste cupiditate sapiente quo, praesentium, maxime inventore.
+		<div class="container">
+			<form action="#" @submit.prevent="submit">
+				<!-- form-group -->
+				<div class="form-group">
+    			<label for="exampleInputEmail1">XXX</label>
+    				<input type="text" class="form-control" id="xxx" name="xxx" placeholder="Enter first currency">
+				</div>
+				<!-- END:form-group -->
+
+				<!-- form-group -->
+				<div class="form-group">
+    			<label for="exampleInputEmail1">YYY</label>
+    				<input type="text" class="form-control" id="yyy" name="yyy" placeholder="Enter secnd currency">
+				</div>
+				<!-- END:form-group -->
+				<button type="submit" class="form-submit btn btn-primary">Submit</button>
+			</form>
+		</div>
 	</div>
 </template>
+
+<script>
+export default {
+  methods: {
+    submit () {
+      console.log('s')
+    }
+  }
+}
+</script>

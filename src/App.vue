@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <a href="/" class="app-logo text-center">
+      <img src="./assets/img/logo.png" alt="" class="app-logo__img" />
+    </a>
     <currency-exchange />
   </div>
 </template>
