@@ -4,19 +4,24 @@
 			<form action="#" @submit.prevent="submit">
 				<!-- form-group -->
 				<div class="form-group">
-    			<label for="exampleInputEmail1">XXX</label>
-    				<input type="text" class="form-control" id="xxx" name="xxx" placeholder="Enter first currency">
+    			<label for="fsyms">Currency 1</label>
+    				<input type="text" class="form-control" id="fsyms" name="fsyms" placeholder="Enter first currency" v-model="formInfo.fsyms">
 				</div>
 				<!-- END:form-group -->
 
 				<!-- form-group -->
 				<div class="form-group">
-    			<label for="exampleInputEmail1">YYY</label>
-    				<input type="text" class="form-control" id="yyy" name="yyy" placeholder="Enter secnd currency">
+    			<label for="tsyms">Currency 2</label>
+    				<input type="text" class="form-control" id="tsyms" name="tsyms" placeholder="Enter secnd currency" v-model="formInfo.tsyms">
 				</div>
 				<!-- END:form-group -->
 				<button type="submit" class="form-submit btn btn-primary">Check Excnahge of the values</button>
 			</form>
+			<!-- formOutput -->
+			<div id="formOutput">
+				<div class="alert form-output"></div>
+			</div>
+			<!-- END:formOutput -->
 		</div>
 	</div>
 </template>
@@ -25,12 +30,17 @@
 export default {
   data () {
     return {
-      apiUrl: 'https://www.cryptocompare.com/api/#-'
+      formInfo: {
+        fsym: '',
+        tsyms: ''
+      },
+      formResponse: '',
+      apiUrl: 'https://min-api.cryptocompare.com/data/price?'
     }
   },
   methods: {
     submit () {
-      this.$http.get(this.apiUrl + '10')
+      this.$http.get(this.apiUrl, {params: this.formInfo})
       .then(response => console.log(response))
     }
   }
