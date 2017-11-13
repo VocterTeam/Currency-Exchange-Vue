@@ -1,11 +1,11 @@
 <template>
 	<div class="currency-exchange">
 		<div class="container">
-			<form action="#" @submit.prevent="submit">
+			<form action="#" class="form" @submit.prevent="submit">
 				<!-- form-group -->
 				<div class="form-group">
-    			<label for="fsyms">Currency 1</label>
-    				<input type="text" class="form-control" id="fsyms" name="fsyms" placeholder="Enter first currency" v-model="formInfo.fsyms">
+    			<label for="fsym">Currency 1</label>
+    				<input type="text" class="form-control" id="fsym" name="fsym" placeholder="Enter first currency" v-model="formInfo.fsym">
 				</div>
 				<!-- END:form-group -->
 
@@ -18,8 +18,8 @@
 				<button type="submit" class="form-submit btn btn-primary">Check Excnahge of the values</button>
 			</form>
 			<!-- formOutput -->
-			<div id="formOutput">
-				<div class="alert form-output"></div>
+			<div id="formOutput" v-if="formResponse.message">
+				<div class="form-output alert" :class="{'alert-success': formResponse.success = true, 'alert-danger': formResponse.success === false}">{{formResponseComputed}}</div>
 			</div>
 			<!-- END:formOutput -->
 		</div>
@@ -34,14 +34,31 @@ export default {
         fsym: '',
         tsyms: ''
       },
-      formResponse: '',
+      isResponse: false,
+      formResponse: {
+        message: '',
+        success: false
+      },
       apiUrl: 'https://min-api.cryptocompare.com/data/price?'
+    }
+  },
+  computed: {
+    formResponseComputed () {
+      return this.formResponse.message
     }
   },
   methods: {
     submit () {
       this.$http.get(this.apiUrl, {params: this.formInfo})
-      .then(response => console.log(response))
+      .then(response => {
+        this.isResponse = true
+        this.formResponse.success = true
+        this.formResponse.message = `Exchange Rate between ${this.formInfo.fsym} and ${this.formInfo.tsyms} is ${response.bodyText}`
+        console.log(response)
+      }).catch(error => {
+        this.formResponse.success = false
+        console.log(error)
+      })
     }
   }
 }
