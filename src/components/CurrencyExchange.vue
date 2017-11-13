@@ -19,7 +19,7 @@
 			</form>
 			<!-- formOutput -->
 			<div id="formOutput" v-if="formResponse.message">
-				<div class="form-output alert" :class="{'alert-success': formResponse.success = true, 'alert-danger': formResponse.success === false}">{{formResponseComputed}}</div>
+				<div class="form-output alert" :class="{'alert-success': formResponse.success, 'alert-danger': formResponse.error}">{{formResponseComputed}}</div>
 			</div>
 			<!-- END:formOutput -->
 		</div>
@@ -37,7 +37,8 @@ export default {
       isResponse: false,
       formResponse: {
         message: '',
-        success: false
+        success: false,
+        error: true
       },
       apiUrl: 'https://min-api.cryptocompare.com/data/price?'
     }
@@ -52,12 +53,19 @@ export default {
       this.$http.get(this.apiUrl, {params: this.formInfo})
       .then(response => {
         this.isResponse = true
-        this.formResponse.success = true
-        this.formResponse.message = `Exchange Rate between ${this.formInfo.fsym} and ${this.formInfo.tsyms} is ${response.bodyText}`
-        console.log(response)
+        if (this.formInfo.fsym !== '' && this.formInfo.tsyms !== '') {
+          this.formResponse.success = true
+          this.formResponse.error = false
+          this.formResponse.message = `Exchange Rate between ${this.formInfo.fsym} and ${this.formInfo.tsyms} is ${response.body[this.formInfo.tsyms]}`
+        } else {
+          this.formResponse.success = false
+          this.formResponse.error = true
+          this.formResponse.message = 'Please, fill all fields'
+        }
+        console.log(response.body)
       }).catch(error => {
         this.formResponse.success = false
-        console.log(error)
+        console.log('error', error)
       })
     }
   }
