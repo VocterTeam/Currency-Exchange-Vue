@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     submit () {
-      this.$http.get(this.apiUrl + 10)
+      this.$http.get(this.apiUrl + '10')
       .then(response => console.log(response))
     }
   }
