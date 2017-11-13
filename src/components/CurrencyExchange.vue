@@ -34,7 +34,6 @@ export default {
         fsym: '',
         tsyms: ''
       },
-      isResponse: false,
       formResponse: {
         message: '',
         success: false,
@@ -52,7 +51,6 @@ export default {
     submit () {
       this.$http.get(this.apiUrl, {params: this.formInfo})
       .then(response => {
-        this.isResponse = true
         if (this.formInfo.fsym !== '' && this.formInfo.tsyms !== '') {
           this.formResponse.success = true
           this.formResponse.message = `Exchange Rate between ${this.formInfo.fsym} and ${this.formInfo.tsyms} is ${response.body[this.formInfo.tsyms]}`
