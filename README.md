@@ -1,6 +1,6 @@
-# fast-vue
+# Currency-Exchange-Vue
 
-> fast project on vue
+> vue app for currency exchange monitoring
 
 ## Build Setup
 
