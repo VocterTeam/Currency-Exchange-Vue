@@ -14,3 +14,5 @@ export default {
   }
 }
 </script>
+
+<style src="./assets/scss/app.scss"></style>
