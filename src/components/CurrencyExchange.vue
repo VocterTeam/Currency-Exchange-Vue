@@ -19,7 +19,7 @@
 			</form>
 			<!-- formOutput -->
 			<div id="formOutput" v-if="formResponse.message">
-				<div class="form-output alert" :class="{'alert-success': formResponse.success, 'alert-danger': formResponse.error}">{{formResponseComputed}}</div>
+				<div class="form-output alert" :class="[formResponse.success ? 'alert-success' : 'alert-danger']">{{formResponseComputed}}</div>
 			</div>
 			<!-- END:formOutput -->
 		</div>
@@ -55,11 +55,9 @@ export default {
         this.isResponse = true
         if (this.formInfo.fsym !== '' && this.formInfo.tsyms !== '') {
           this.formResponse.success = true
-          this.formResponse.error = false
           this.formResponse.message = `Exchange Rate between ${this.formInfo.fsym} and ${this.formInfo.tsyms} is ${response.body[this.formInfo.tsyms]}`
         } else {
           this.formResponse.success = false
-          this.formResponse.error = true
           this.formResponse.message = 'Please, fill all fields'
         }
         console.log(response.body)
