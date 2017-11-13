@@ -47,7 +47,12 @@ export default {
     }
   },
   methods: {
+    formDataToUpperCase () {
+      this.formInfo.fsym = this.formInfo.fsym.toUpperCase()
+      this.formInfo.tsyms = this.formInfo.tsyms.toUpperCase()
+    },
     submit () {
+      this.formDataToUpperCase()
       this.$http.get(this.apiUrl, {params: this.formInfo})
       .then(response => {
         if (this.formInfo.fsym !== '' && this.formInfo.tsyms !== '') {
